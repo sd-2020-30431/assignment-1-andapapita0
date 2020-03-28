@@ -11,6 +11,10 @@ public class FoodItem {
 	private Date expiration_date;
 	private Date consumption_date;
 	
+	public FoodItem() {
+		
+	}
+	
 	public FoodItem(String name, int quantity, int calorie_value, Date purchase_date, Date expiration_date,
 			Date consumption_date) {
 		this.name = name;
@@ -76,6 +80,15 @@ public class FoodItem {
 	public void setConsumption_date(Date consumption_date) {
 		this.consumption_date = consumption_date;
 	}
+
+	@Override
+	public String toString() {
+		return "FoodItem [id=" + id + ", name=" + name + ", quantity=" + quantity + ", calorie_value=" + calorie_value
+				+ ", purchase_date=" + purchase_date + ", expiration_date=" + expiration_date + ", consumption_date="
+				+ consumption_date + "]";
+	}
+	
+	
 	
 	
 }
