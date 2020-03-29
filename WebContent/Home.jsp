@@ -22,11 +22,11 @@
 	
 	<div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2>List of groceries</h2></caption>
+            <caption><h2>List of groceries you have</h2></caption>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Quantity</th>
+                <th>Quantity (grams)</th>
                 <th>Calories</th>
                 <th>Purchase date</th>
                 <th>Expiration date</th>
@@ -42,9 +42,39 @@
                     <td><c:out value="${item.purchase_date}" /></td>
                     <td><c:out value="${item.expiration_date}" /></td>
                     <td><c:out value="${item.consumption_date}" /></td>
+                   
                 </tr>
             </c:forEach>
         </table>
+    
+    	<div>
+        <h4><a href="NotificationServlet"><span style="color:red">CHECK Notifications</span></a></h4>
+             <p><br><span style="color:red"><%=(request.getAttribute("err") == null) ? "" 
+            		 : request.getAttribute("err")%></span> </p>  
+        </div>
+        	
+        <div>
+        <h4><a href="GroceryListServlet">Ideal burndown rates for groceries:</a></h4>
+             <p><br> <%=(request.getAttribute("burn") == null) ? "" : request.getAttribute("burn")%> </p>  
+        </div>
+        
+        <div>
+        	<h4><a href="AddItem.jsp">Add new grocery</a></h4>
+        	<p><br> <%=(request.getAttribute("add") == null) ? "" : request.getAttribute("add")%>  </p>
+        </div>
+        <div>
+        	<h4><a href="UpdateItem.jsp">Update consumption date</a></h4>
+        	<p><br> <%=(request.getAttribute("update") == null) ? "" : request.getAttribute("update")%>  </p>
+        </div>
+        <div>
+        	<h4><a href="DeleteItem.jsp">Delete item from grocery list</a></h4>
+        	<p><br> <%=(request.getAttribute("delete") == null) ? "" : request.getAttribute("delete")%>  </p>
+        </div>
+        <div>
+        	<h4><a href="Report.jsp">Get report</a></h4>
+        	<p><br> <%=(request.getAttribute("add") == null) ? "" : request.getAttribute("add")%>  </p>
+        </div>
     </div>
+    
 </body>
 </html>

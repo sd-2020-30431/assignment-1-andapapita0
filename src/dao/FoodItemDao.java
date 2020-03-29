@@ -82,14 +82,17 @@ public class FoodItemDao {
     }
     
     public static void main(String[] args) throws ParseException {
-    	SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-        Date d1 = sdformat.parse("2020-03-28");
-        Date d2 = sdformat.parse("2020-04-04");
-        Date d3 = sdformat.parse("2020-04-01");
-    	FoodItem f = new FoodItem("sparanghel", 500, 1000, d1, d2, d3);
-    	f.setId(19);
-    	FoodItemDao d = new FoodItemDao();
-    	d.updateFoodItem(f);
+    	
+      
+    	
+    	FoodItemDao dao = new FoodItemDao();
+		List<FoodItem> groceries = dao.getAlldata();
+		String all = "";
+		for(FoodItem grocery: groceries) {
+			boolean b = grocery.waste();
+			if(b) all+="mata";
+		}
+		System.out.println(all);
     }
     
  

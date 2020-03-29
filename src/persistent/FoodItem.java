@@ -88,7 +88,27 @@ public class FoodItem {
 				+ consumption_date + "]";
 	}
 	
+	public long getDays() {
+		long days = this.expiration_date.getTime() - this.purchase_date.getTime();
+		return days / (1000*60*60*24);
+	}
 	
+	public long burndownRate() {
+		return this.getCalorie_value() / this.getDays();
+	}
 	
+	public boolean waste() {
+		Date current= new Date();
+		if(this.getConsumption_date()==null && current.compareTo(this.getExpiration_date()) > 0) {
+			return true;
+		}
+		else return false;
+	}
 	
+	public boolean twoDaysBeforeExpiration() {
+		Date current = new Date();
+		if((this.getExpiration_date().getTime() - current.getTime()) / (1000*60*60*24) == 2)
+			return true;
+		else return false;
+	}
 }
