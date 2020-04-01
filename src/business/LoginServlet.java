@@ -1,6 +1,7 @@
 package business;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		 String userValidate = dao.authenticateUser(user);
 		 if(userValidate.equals("success")) {
 			 HttpSession session = request.getSession(true);
-			 session.setAttribute("username", username);
+			 session.setAttribute("username", username); 
 			 request.setAttribute("username", username); 
 			 request.getRequestDispatcher("/Home.jsp").forward(request, response);
 		 }

@@ -1,9 +1,7 @@
 package dao;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -73,6 +71,7 @@ public class FoodItemDao {
             Query q = session.createQuery("from FoodItem ");
             contacts = (List<FoodItem>) q.list();
             transaction.commit();
+            
            return contacts;  
         } catch (Exception e) {
         	System.out.println("error");
@@ -83,14 +82,12 @@ public class FoodItemDao {
     
     public static void main(String[] args) throws ParseException {
     	
-      
     	
     	FoodItemDao dao = new FoodItemDao();
 		List<FoodItem> groceries = dao.getAlldata();
 		String all = "";
 		for(FoodItem grocery: groceries) {
-			boolean b = grocery.waste();
-			if(b) all+="mata";
+			System.out.println(grocery.getName());
 		}
 		System.out.println(all);
     }

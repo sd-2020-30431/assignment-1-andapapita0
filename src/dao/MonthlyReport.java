@@ -7,7 +7,7 @@ import java.util.List;
 
 import persistent.FoodItem;
 
-public class WeeklyReport implements ReportFactory {
+public class MonthlyReport implements ReportFactory {
 	
 	@Override
 	public Calendar getCalendarForNow() {
@@ -18,7 +18,7 @@ public class WeeklyReport implements ReportFactory {
 	
 	@Override
 	public void setTimeToBeginningOfDay(Calendar calendar) {
-		calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMinimum(Calendar.DAY_OF_WEEK));
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 	    calendar.set(Calendar.HOUR_OF_DAY, 0);
 	    calendar.set(Calendar.MINUTE, 0);
 	    calendar.set(Calendar.SECOND, 0);
@@ -27,7 +27,7 @@ public class WeeklyReport implements ReportFactory {
 
 	@Override
 	public void setTimeToEndOfDay(Calendar calendar) {
-		calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 	    calendar.set(Calendar.HOUR_OF_DAY, 23);
 	    calendar.set(Calendar.MINUTE, 59);
 	    calendar.set(Calendar.SECOND, 59);
@@ -54,29 +54,30 @@ public class WeeklyReport implements ReportFactory {
 
 	@Override
 	public String generateReport() {
-
-		Date start_date, end_date;
-		start_date = getStartDay();
-		end_date = getEndDay();
-		int nr = 0;
-		String all="This week, from " + start_date.toString() + " to " + end_date.toString() +
+		Date beginning, end;
+		beginning = getStartDay();
+		end = getEndDay();
+	    int nrOfWastedItems = 0;
+		String all="This month, from " + beginning.toString() + " to " + end.toString() +
 				", the following products were wasted:<br>";
 		FoodItemDao d = new FoodItemDao();
 		List<FoodItem> list = d.getAlldata();
 		for(FoodItem item:list) {
-			if(item.getExpiration_date().compareTo(start_date) >= 0 && item.getExpiration_date().compareTo(end_date) <= 0) {
+			if(item.getExpiration_date().compareTo(beginning) >= 0 && item.getExpiration_date().compareTo(end) <= 0) {
 				if(item.waste() == true) {
 					all+="	-> " + item.getName() + "<br>";
-					nr++;
+					nrOfWastedItems++;
 				}
 			}
 		}
-		all += "<br><br> The total number of wasted products this week is: " + nr;
+		all += "<br><br> The total number of wasted products this month is: " + nrOfWastedItems;
 		return all;
 	}
 	
 	public static void main(String[] args) {
-		WeeklyReport r = new WeeklyReport();
+		MonthlyReport r = new MonthlyReport();
 		r.generateReport();
+		
 	}
+
 }

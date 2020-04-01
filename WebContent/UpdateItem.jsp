@@ -5,6 +5,26 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Update consumption date</title>
+<script> 
+function validate()
+{ 
+ var name = document.form.name.value; 
+ var consumption_date = document.form.consumption_date.value; 
+ 
+ if (name==null || name=="")
+ { 
+ alert("Name cannot be blank"); 
+ return false; 
+ }
+
+ if (consumption_date==null || consumption_date=="")
+ { 
+ alert("Consumption date cannot be blank"); 
+ return false; 
+ }
+ 
+}
+</script> 
 </head>
 <body>
 <br>

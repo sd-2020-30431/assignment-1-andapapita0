@@ -111,4 +111,18 @@ public class FoodItem {
 			return true;
 		else return false;
 	}
+	
+	public boolean oneDayBeforeExpiration() {
+		Date current = new Date();
+		if((this.getExpiration_date().getTime() - current.getTime()) / (1000*60*60*24) == 1)
+			return true;
+		else return false;
+	}
+	
+	public boolean todaysReminder() {
+		Date current = new Date();
+		if(this.getExpiration_date().compareTo(current) > 0)
+			return true;
+		else return false;
+	}
 }

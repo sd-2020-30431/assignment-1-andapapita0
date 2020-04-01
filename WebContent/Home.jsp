@@ -13,7 +13,7 @@
     <sql:setDataSource
         var="myDS"
         driver="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/waste"
+        url="jdbc:mysql://localhost:3306/waste?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC"
         user="root" password="root"
     />
     <sql:query var="list_groceries" dataSource="${myDS}">
@@ -71,10 +71,20 @@
         	<p><br> <%=(request.getAttribute("delete") == null) ? "" : request.getAttribute("delete")%>  </p>
         </div>
         <div>
-        	<h4><a href="Report.jsp">Get report</a></h4>
-        	<p><br> <%=(request.getAttribute("add") == null) ? "" : request.getAttribute("add")%>  </p>
-        </div>
-    </div>
-    
-</body>
-</html>
+        	<h4><a href="MonthlyReportServlet">Get monthly report</a></h4>
+        	<p><br> <%=(request.getAttribute("report") == null) ? "" : request.getAttribute("report")%>  </p>
+       </div>
+       <div>
+        	<h4><a href="WeeklyReportServlet">Get weekly report</a></h4>
+        	<p><br> <%=(request.getAttribute("reportw") == null) ? "" : request.getAttribute("reportw")%>  </p>
+       </div>
+  </div>
+  
+  <div>
+  	<h5> If you want to donate your food before it goes to waste, we suggest the following organizations: </h5>
+  	<p><br><a href=https://www.fightforlife.ro/rezultate/o-mas-cald-pentru-bunici-.html>www.fightforlife.ro</a></p>
+  	<p><br><a href=http://www.omasacalda.ro>www.omasacalda.ro/</a></p>
+  </div>
+  
+  </body>
+  

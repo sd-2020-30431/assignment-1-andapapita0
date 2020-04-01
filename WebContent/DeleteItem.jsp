@@ -5,6 +5,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>delete</title>
+<script> 
+function validate()
+{ 
+ var id = document.form.id.value; 
+
+ 
+ if (id==null || id=="")
+ { 
+ alert("Id cannot be blank"); 
+ return false; 
+ }
+ 
+}
+</script> 
 </head>
 <body>
 <br>

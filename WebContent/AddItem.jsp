@@ -5,6 +5,42 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script> 
+function validate()
+{ 
+ var name = document.form.name.value;
+ var quantity = document.form.quantity.value;
+ var calorie_value = document.form.calorie_value.value; 
+ var purchase_date = document.form.purchase_date.value;
+ var expiration_date= document.form.expiration_date.value;
+ 
+ if (name==null || name=="")
+ { 
+ alert("Name can't be blank"); 
+ return false; 
+ }
+ else if (quantity==null || quantity=="")
+ { 
+ alert("The quantity can't be blank"); 
+ return false; 
+ }
+ else if (calorie_value==null || calorie_value=="")
+ { 
+ alert("The calories field can't be blank"); 
+ return false; 
+ }
+ else if(purchase_date==null || purchase_date=="")
+ { 
+ alert("Purchase date can't be blank."); 
+ return false; 
+ } 
+ else if (expiration_date==null || expiration_date=="")
+ { 
+ alert("Expiration date can't be blank."); 
+ return false; 
+ } 
+ } 
+</script> 
 </head>
 <body>
 	<br>
@@ -37,8 +73,8 @@
  				</tr>
  				
  				<tr>
- 					<td><%=(request.getAttribute("errMessage") == null) ? ""
- 					: request.getAttribute("errMessage")%></td>
+ 					<td><span style="color:red"><%=(request.getAttribute("add") == null) ? ""
+ 						: request.getAttribute("add")%></span></td>
  				</tr>
  				<tr>
  					<td></td>

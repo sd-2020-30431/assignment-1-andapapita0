@@ -31,16 +31,23 @@ public class NotificationServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		FoodItemDao dao = new FoodItemDao();
 		List<FoodItem> groceries = dao.getAlldata();
 		String all = "";
+		String food = "";
 		for(FoodItem grocery: groceries) {
+			boolean a = grocery.todaysReminder();
+			if(a) food += grocery.getName() + ", ";
 			boolean b = grocery.waste();
 			if(b) all += "WASTE ALERT! There is waste for " + grocery.getName() + "!<br>";
 			boolean c = grocery.twoDaysBeforeExpiration();
-			if(c) all += "There are 2 days left until " + grocery.getName() + " expires, better eat it or give it away!<br>";
+			if(c) all += "There are 2 days left until " + grocery.getName() + " expires, better "
+					+ "eat it or give it away!<br>";
+			boolean d = grocery.oneDayBeforeExpiration();
+			if(d) all += "ONE DAY LEFT before " + grocery.getName() + " expires, consume it before it goes to waste!<br>";
 		}
+		all += "   -> To remain on track with the ideal burndown rate, today you should consume " + food;
 		System.out.println(all);
 		HttpSession session = request.getSession(true); 
 		if(session!=null) {
